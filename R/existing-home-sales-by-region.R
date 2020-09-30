@@ -22,9 +22,9 @@ p %>% pamngr::all_output("existing-home-sales-by-region")
 
 # Stacked ---------------------------------------------------------------------------
 
-p <- ggplot2::ggplot(data = dat, ggplot2::aes_string(x = "dates", y = "value", fill = "variable")) +
+p <- ggplot2::ggplot(dat, ggplot2::aes(x = dates, y = value, fill = variable)) +
   ggplot2::geom_bar(stat = "identity", position = "stack") +
-  ggplot2::scale_fill_manual(values =  pam.pal())
+  ggplot2::scale_fill_manual(values =  pamngr::pam.pal())
 
 p <- p  %>% 
   pamngr::pam_plot(
