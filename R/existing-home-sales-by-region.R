@@ -5,6 +5,8 @@ dat <- pamngr::join_sheets(c("etslne", "etslmw", "etslso","etslwe")) %>%
   magrittr::set_colnames(c("dates", "Northeast", "Midwest", "South", "West")) %>%
   tidyr::pivot_longer(cols = -dates, names_to = "variable")
 
+# Faceted by region -----------------------------------------------------------------
+
 p <- dat %>%
   pamngr::barplot() %>%
   pamngr::pam_plot(
@@ -17,6 +19,20 @@ p <- p + ggplot2::facet_wrap(.~variable, ncol = 2)
 
 p %>% pamngr::all_output("existing-home-sales-by-region")
 
+
+# Stacked ---------------------------------------------------------------------------
+
+p <- ggplot2::ggplot(data = dat, ggplot2::aes_string(x = "dates", y = "value", fill = "variable")) +
+  ggplot2::geom_bar(stat = "identity", position = "stack") +
+  ggplot2::scale_fill_manual(values =  pam.pal())
+
+p <- p  %>% 
+  pamngr::pam_plot(
+    plot_title = "US Existing Home Sales",
+    plot_subtitle = "Millions, SAAR"
+  )
+
+p %>% pamngr::all_output("existing-home-sales-by-region-stacked")
 
 # Northeast -------------------------------------------------------------------------
 
