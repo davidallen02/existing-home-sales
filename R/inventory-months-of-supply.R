@@ -7,7 +7,7 @@ p <- dat %>%
   pamngr::lineplot() %>%
   pamngr::pam_plot(
     plot_title = "Existing Homes for Sale",
-    plot_subtitle = "Millions",
+    plot_subtitle = "Months of Sales at Current Sales Pace",
     show_legend = FALSE
   )
 
